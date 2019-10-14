@@ -11,7 +11,7 @@ caps["deviceName"] = "hogwarts"
 caps["appPackage"] = "com.xueqiu.android"
 caps["appActivity"] = ".view.WelcomeActivityAlias"
 caps["autoGrantPermissions"] = "true"
-
+caps["automationName"]="UiAutomator1"
 # 初始化driver
 driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
 # 追加一句隐式等待 隔半秒就去check一下是否有下面的元素，定位到后（10内找到不会一直等到10s）直接下一步。
