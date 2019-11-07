@@ -19,7 +19,7 @@ class TestWeixinLogin(object):
         # 如果有必须要进行第一次安装
         # caps["app"] = "/Users/duheng/Downloads/xueqiu_wxdialog.apk"
         caps["platformName"] = "android"
-        caps["deviceName"] = "demo"
+        caps["deviceName"] = "demo.txt"
         caps["appPackage"] = "com.xueqiu.android"
         caps["appActivity"] = ".view.WelcomeActivityAlias"
         # 解决第一次启动的问题
@@ -36,7 +36,7 @@ class TestWeixinLogin(object):
     def restart_app(cls):
         desired_caps = {
             "platformName": "android",
-            "deviceName": "demo",
+            "deviceName": "demo.txt",
             "appPackage": "com.xueqiu.android",
             "appActivity": ".view.WelcomeActivityAlias",
             "noReset": True

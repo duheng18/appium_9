@@ -11,13 +11,13 @@ class TestXueqiuAndroid(object):
 
     @classmethod
     def setup_class(cls):
-        print("setup class!")
-        cls.driver = cls.init_appium()
+        print("setup class 在当前类下的所有用例执行之前只执行一次")
+        cls.driver = cls.install_app()
 
     def setup_method(self):
-        print("setup method!")
-        TestXueqiuAndroid.driver = self.restart_appium()
-        self.driver = TestXueqiuAndroid.driver
+        print("setup method 在每个测试用例执行之前执行一次")
+        # 获取启动的appium的driver实例，用于后续每个case的driver
+        self.driver = self.restart_app()
 
     def test_login(self):
         # 写case
@@ -28,7 +28,7 @@ class TestXueqiuAndroid(object):
         el3 = self.driver.find_element_by_id("com.xueqiu.android:id/tv_login_with_account")
         el3.click()
 
-    def test_jijin(self):
+    def test_fund(self):
         # 写case
         self.driver.find_element_by_xpath("//*[contains(@resource-id, 'indicator')]//*[@text='基金']").click()
 
@@ -40,6 +40,7 @@ class TestXueqiuAndroid(object):
         for i in range(5):
             self.driver.swipe(1000, 1000, 200, 200)
             time.sleep(2)
+            self.driver.get_screenshot_as_file(str(i)+".png")
 
     def test_action(self):
         self.driver.find_element_by_xpath("//*[contains(@resource-id, 'indicator')]//*[@text='基金']")
@@ -62,12 +63,13 @@ class TestXueqiuAndroid(object):
         print(self.driver.get_window_size())
 
     @classmethod
-    def init_appium(cls) -> WebDriver:
+    def install_app(cls) -> WebDriver:
         caps = {}
         caps["platformName"] = "android"
         caps["deviceName"] = "hogwarts"
         caps["appPackage"] = "com.xueqiu.android"
         caps["appActivity"] = ".view.WelcomeActivityAlias"
+        # 解决第一次启动的问题
         caps["autoGrantPermissions"] = "true"
 
         driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
@@ -75,16 +77,18 @@ class TestXueqiuAndroid(object):
         return driver
 
     @classmethod
-    def restart_appium(cls) -> WebDriver:
+    def restart_app(cls) -> WebDriver:
         caps = {}
+        # 如果有必要，进行第一次安装
         # caps["app"]=''
         caps["platformName"] = "android"
         caps["deviceName"] = "hogwarts"
         caps["appPackage"] = "com.xueqiu.android"
         caps["appActivity"] = ".view.WelcomeActivityAlias"
-        # caps["autoGrantPermissions"] = "true"
+        # 为了更快的启动，并保留之前的数据，从而可以保存上一个case执行后的状态
         caps["noReset"] = True
 
         driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
         driver.implicitly_wait(15)
         return driver
+

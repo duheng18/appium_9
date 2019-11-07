@@ -31,13 +31,13 @@ class TestXueqiu(object):
         for i in range(8):
             for j in range(5):
                 # 上下滑动
-                action.press(x=rect['width'] / 2, y=rect['height'] / 2).move_to(x=rect['width'] / 2, y=rect[
-                                                                                                           'height'] / 5).release().perform()
+                action.press(x=rect['width']*0.5, y=rect['height']*0.5).move_to(x=rect['width'] *0.2, y=rect[
+                                                                                                           'height']*0.2).release().perform()
                 print(i)
                 time.sleep(2)
             # 左右滑动
-            action.press(x=rect['width'] / 2, y=rect['height'] / 5).move_to(x=rect['width'] / 6,
-                                                                            y=['height'] / 5).release().perform()
+            action.press(x=rect['width']*0.2, y=rect['height']*0.2).move_to(x=rect['width']*0.5,
+                                                                            y=['height']*0.2).release().perform()
             time.sleep(3)
 
     @classmethod

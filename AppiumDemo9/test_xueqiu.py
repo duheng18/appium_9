@@ -58,7 +58,7 @@ class TestXueqiuAndroid(object):
                                                                                                              'height'] * 0.2).release().perform()
             print(i)
             time.sleep(2)
-            self.driver.get_screenshot_as_file(str(i)+'.png')
+            self.driver.get_screenshot_as_file(str(i) + '.png')
 
     def test_window_size(self):
         print(self.driver.get_window_rect())
@@ -104,5 +104,3 @@ class TestXueqiuAndroid(object):
         # 追加一句隐式等待 隔半秒就去check一下是否有下面的元素，定位到后（10内找到不会一直等到10s）直接下一步。
         driver.implicitly_wait(10)
         return driver
-
-

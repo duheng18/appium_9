@@ -4,9 +4,11 @@
 # 导入依赖
 from appium import webdriver
 import pytest
+from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.webdriver import WebDriver
-from appium.webdriver.common.touch_action import TouchAction
 import time
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class TestXueqiuAndroid(object):
@@ -15,34 +17,37 @@ class TestXueqiuAndroid(object):
     @classmethod
     def setup_class(cls):
         print("setup class 在当前类下的所有用例执行之前只执行一次")
-        cls.driver = cls.install_app()
-        # 进入我的页面
-        el1 = cls.driver.find_element_by_id("user_profile_icon")
-        el1.click()
+        cls.driver = cls.restart_app()
+        print(cls.driver.contexts)
+        WebDriverWait(cls.driver, 10).until(EC.presence_of_element_located((MobileBy.XPATH, "//*[@text='交易']")))
+        cls.driver.find_element_by_xpath("//*[@text='交易']").click()
 
     def setup_method(self):
         print("setup method 在每个测试用例执行之前执行一次")
         # 获取启动的appium的driver实例，用于后续每个case的driver
         self.driver = TestXueqiuAndroid.driver
-        el2 = self.driver.find_element_by_id("iv_login_phone")
-        el2.click()
 
-    def test_login_password(self):
-        self.driver.find_element_by_id('sina_login').click()
-        self.driver.back()
-        time.sleep(5)
+        self.driver.find_element_by_xpath("//*[@text='交易']").click()
 
-    def test_login_phone(self):
-        el3 = self.driver.find_element_by_id("tv_login_with_account")
-        el3.click()
+    def test_webview_simulator_native(self):
+        self.driver.find_element_by_xpath("//*[@text='A股开户']").click()
+        self.driver.find_element_by_xpath("//*[@text='立即开户']")
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((MobileBy.XPATH, "//*[@text='立即开户']")))
 
+    def test_webview_simulator_css(self):
+        print(self.driver.contexts)
+        print(self.driver.current_context)
+        self.driver.switch_to.context(self.driver.contexts[-1])
+        print(self.driver.current_context)
+
+    def test_webview_simulator_fund(self):
+        self.driver.find_element_by_xpath("//*[@text='基金开户']").click()
 
     def teardown_method(self):
         print("teardown method")
         # 不加也没关系，如果不quit，启动appium会自动quit之前的session
         self.driver.back()
-
-
+        self.driver.back()
 
     @classmethod
     def install_app(cls) -> webdriver:

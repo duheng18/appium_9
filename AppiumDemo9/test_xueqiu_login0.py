@@ -1,3 +1,4 @@
+
 # This sample code uses the Appium python client
 # pip install Appium-Python-Client
 # Then you can paste this into a file and simply run with Python
@@ -16,7 +17,6 @@ class TestXueqiuAndroid(object):
     def setup_class(cls):
         print("setup class 在当前类下的所有用例执行之前只执行一次")
         cls.driver = cls.install_app()
-        # 进入我的页面
         el1 = cls.driver.find_element_by_id("user_profile_icon")
         el1.click()
 
@@ -41,8 +41,6 @@ class TestXueqiuAndroid(object):
         print("teardown method")
         # 不加也没关系，如果不quit，启动appium会自动quit之前的session
         self.driver.back()
-
-
 
     @classmethod
     def install_app(cls) -> webdriver:

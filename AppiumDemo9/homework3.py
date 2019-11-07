@@ -13,7 +13,7 @@ class TestDemon:
     def setup_class(cls):
         desired_capabilities = {
             "platformName": "Android",
-            "deviceName": "demo",
+            "deviceName": "demo.txt",
             "appPackage": "com.xueqiu.android",
             "appActivity": ".view.WelcomeActivityAlias",
             "autoGrantPermissions": True,

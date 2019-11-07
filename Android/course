@@ -1,0 +1,49 @@
+
+课程预告
+移动自动化测试入门
+Android自动化测试
+iOS自动化测试
+webview与小程序自动化测试
+pageobject模式与数据驱动
+自动化测试与持续集成结合
+测试框架原理剖析
+雪球自动化测试实战
+企业微信自动化测试实战
+自建智能设备实验室
+
+入门篇：自动化测试框架选择
+目前mobile自动化的方案
+iOS    Android
+推荐appiun
+    跨语言：Java Python nodejs等
+    跨平台：
+        Android iOS
+        windows Mac
+    底层多引擎可切换
+    生态丰富，社区强大
+IOS:KIF WDA XCTest
+Android:Robotium Uiautomator
+其他框架:calabash macaca atx
+
+
+appium生态工具
+adb:Android的控制工具，用于获取Android的各种数据和控制
+Appium Desktop:内嵌了appium server和inspector的综合工具
+Appium Server:appium的核心工具，命令行工具
+Appium client：各种语言的客户端封装库，用于连接appium server
+    python
+    java
+    ruby
+    robotframework-appium
+AppCrawler自动遍历工具
+
+
+获取app的信息
+app信息
+    获取当前界面元素：adb shell dumpsys activity top
+    获取任务列表：
+    adb kill-server
+    adb logcat
+    adb logcat | grep -i displayed
+    adb shell am start -W -S -n 包名/activity名
+    adb shell dumpsys activity activities top
