@@ -7,7 +7,6 @@ from appium.webdriver.webdriver import WebDriver
 
 
 class TestXueqiuAndroid(object):
-    dirver = WebDriver
 
     @classmethod
     def setup_class(cls):

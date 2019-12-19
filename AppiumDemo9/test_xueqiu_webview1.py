@@ -2,8 +2,6 @@
 # pip install Appium-Python-Client
 # Then you can paste this into a file and simply run with Python
 # 导入依赖
-import time
-
 from appium import webdriver
 import pytest
 from appium.webdriver.common.mobileby import MobileBy
@@ -41,15 +39,8 @@ class TestXueqiuAndroid(object):
         self.driver.switch_to.context('WEBVIEW_com.xueqiu.android')
         print(self.driver.current_context)
 
-        time.sleep(3)
-        self.driver.find_element_by_css_selector(".trade_home_info_3aI").click()
-        time.sleep(5)
-        print(self.driver.window_handles)
-        self.driver.switch_to.window(self.driver.window_handles[-1])
-        time.sleep(5)
-        self.driver.find_element_by_css_selector("#phone-number").send_keys("18810075728")
-        time.sleep(5)
-        self.driver.find_element_by_css_selector("#code").send_keys("123456")
+    def test_webview_simulator_fund(self):
+        self.driver.find_element_by_xpath("//*[@text='基金开户']").click()
 
     def teardown_method(self):
         print("teardown method")
@@ -84,7 +75,6 @@ class TestXueqiuAndroid(object):
         caps["deviceName"] = "hogwarts"
         caps["appPackage"] = "com.xueqiu.android"
         caps["appActivity"] = ".view.WelcomeActivityAlias"
-        caps["chromedriverExecutableDir"] = "/Users/duheng/Downloads/2.43"
         # 为了更快的驱动，并保留之前的数据，从而可以保存上一个case执行后的状态
         caps["noReset"] = "true"
 
